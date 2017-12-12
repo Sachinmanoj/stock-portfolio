@@ -21,6 +21,16 @@ class stockPortfolio extends Component {
         });
     }
     
+    removeStockFromPortfolio(stockId) {
+        this.setState(function(prevState, props) {
+            let nextState = {};
+            let index = prevState.stockInPortfolio.indexOf(stockId);
+            nextState.stockInPortfolio = prevState.stockInPortfolio.slice();
+            nextState.stockInPortfolio.splice(index, 1);
+            return nextState;
+        });
+    }
+
     render() {
         return ( 
             <div>
@@ -36,7 +46,8 @@ class stockPortfolio extends Component {
 
                 <Manageportfolio 
                 stockdata={this.stockdataObj} 
-                stockInPortfolio={this.state.stockInPortfolio} />
+                stockInPortfolio={this.state.stockInPortfolio} 
+                updatePortfolioHandler={this.removeStockFromPortfolio.bind(this)}/>
 
             </div> 
         );
