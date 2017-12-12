@@ -9,42 +9,72 @@ class pickStocks extends Component {
     constructor (props) {
         super(props);        
         this.appdataObj = new AppdataModel();
-        this.viewableStocks = this.getViewableStocklist();
+        this.state = {};
+        this.state.page = 1;
+        this.data = {};
+        this.data.viewableStocks = this.getViewableStocklist(this.props, this.state);
+        this.data.minStockinView = this.getMinStockinView(this.state);
+        this.data.maxStockinView = this.getMaxStockinView(this.state);
     }
 
-    getViewableStocklist(stockInPortfolio) {
-        let stocks = this.getAvailableStocks(stockInPortfolio);
-        var min = this.getMinStockinView();
-        var max = this.getMaxStockinView();
-        return stocks.slice(min, max);
+    getPrevPageStockLength(state) {
+        return ((state.page - 1) * this.appdataObj.getMaxStockTileInView());
     }
 
-    getAvailableStocks(stockInPortfolio) {
-        stockInPortfolio = stockInPortfolio ? stockInPortfolio : this.props.stockInPortfolio;
-        return  this.props.stockdata.getStockList().filter((stock)=> {
-            return (stockInPortfolio.indexOf(stock.stockId) === -1);
+    getMinStockinView(state) {
+        return  this.getPrevPageStockLength(state) + 1;
+    }
+
+    getMaxStockinView(state) {
+        return this.getMinStockinView(state) + this.data.viewableStocks.length - 1;
+    }
+
+    pageSwitchHandler(counter) {
+        this.setState(function (prevState, props) {
+            let nextState = {};
+            nextState.page = prevState.page + counter;
+            return nextState;
+        }); 
+    }
+
+    getAvailableStocks(props) {
+        return  props.stockdata.getStockList().filter((stock)=> {
+            return (props.stockInPortfolio.indexOf(stock.stockId) === -1);
         });
     }
 
+    getViewableStocklist(props, state) {
+        let stocks = this.getAvailableStocks(props);  
+        var min = this.getPrevPageStockLength(state);
+        var max = min + this.appdataObj.getMaxStockTileInView();
+        return stocks.slice(min, max);
+    }
+
     componentWillUpdate(nextProps, nextState) {
-        console.log(nextProps.stockInPortfolio);
-        this.viewableStocks = this.getViewableStocklist(nextProps.stockInPortfolio);
+        this.data.viewableStocks = this.getViewableStocklist(nextProps, nextState);
+        this.data.minStockinView = this.getMinStockinView(nextState);
+        this.data.maxStockinView = this.getMaxStockinView(nextState);
     }
 
-    getMinStockinView() {
-        return 1;
+    disablePrev() {
+        return this.state.page === 1;
     }
 
-    getMaxStockinView() {
-        return this.appdataObj.getMaxStockTileInView();
+    disableNext() {
+        return this.data.maxStockinView === this.getAvailableStocks(this.props).length;
     }
 
     render() {
         return  (
             <div>
                 <div>PICK STOCKS</div>
-                <div>Showing {this.getMinStockinView()} - {this.getMaxStockinView()} of {this.getAvailableStocks().length} matching stocks</div>
-                <Availablestocks stockdata={this.props.stockdata} viewableStocks={this.viewableStocks} updatePortfolioHandler={this.props.updatePortfolioHandler.bind(this)} />
+                <div>Showing {this.data.minStockinView} - {this.data.maxStockinView} of {this.getAvailableStocks(this.props).length} matching stocks</div>
+                <Availablestocks 
+                stockdata={this.props.stockdata} 
+                viewableStocks={this.data.viewableStocks} 
+                updatePortfolioHandler={this.props.updatePortfolioHandler.bind(this)} />
+                <PickStocknav counter={-1} text="PREV" disableOn={this.disablePrev()} countUpdateHandler={this.pageSwitchHandler.bind(this)} />
+                <PickStocknav counter={1} text="NEXT" disableOn={this.disableNext()}  countUpdateHandler={this.pageSwitchHandler.bind(this)}/>
             </div>
         );
     }
