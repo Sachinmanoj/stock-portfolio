@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import utils from '../utils/utils-service';
 
 class stockTable extends Component {
     
@@ -7,13 +8,17 @@ class stockTable extends Component {
         this.minRows=6;
     }
     
+    getPriceOfStock(stockId) {
+        return '₹' + utils.toRupeeFormat(this.props.stockdata.getPriceOfStock(stockId));
+    }
+
     render() {
 
         let stockRows = this.props.portfolioStocks.map(stock => {
             let shareDetail = this.props.findInShareDetails(this.props.shareDetails, stock.stockId);
             return (<tr key={stock.stockId}>
                 <td> {stock.name} </td>
-                <td> {'₹' + this.props.stockdata.getPriceOfStock(stock.stockId)} </td>
+                <td> {this.getPriceOfStock(stock.stockId)} </td>
                 <td> 
                     <div  className="share-ctrls">
                         <div className="neg-btn" onClick={this.props.updateStockCountHandler.bind(this, stock.stockId, -1)}> - </div> 
@@ -21,7 +26,7 @@ class stockTable extends Component {
                         <div className="pos-btn" onClick={this.props.updateStockCountHandler.bind(this, stock.stockId, 1)}> + </div> 
                     </div>
                 </td>
-                <td> {stock.weight + '%'} </td>
+                <td> {utils.toFixedDecimal(stock.weight) + '%'} </td>
                 <td> 
                     <div className="remove-button" onClick={this.props.updatePortfolioHandler.bind(this, stock.stockId)}>
                         <span> - </span>
@@ -59,5 +64,6 @@ class stockTable extends Component {
         );
     }
 }
+
 
 export default stockTable;

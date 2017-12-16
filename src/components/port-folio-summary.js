@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import utils from '../utils/utils-service';
 
 class portfolioSummary extends Component {
     
@@ -11,8 +12,12 @@ class portfolioSummary extends Component {
     
     calculatePERatio() {
         if(this.calculateSumEarnings() !== 0 ){
-            return (this.props.netWorth / this.calculateSumEarnings());
+            return utils.toFixedDecimal((this.props.netWorth / this.calculateSumEarnings()));
         }
+    }
+    
+    getNetWorth() {
+        return '₹' + utils.toRupeeFormat(this.props.netWorth);
     }
 
     render() {
@@ -25,7 +30,7 @@ class portfolioSummary extends Component {
                     </div>
                     <div className="individual-summary">
                         <div className="individual-summary-title"> Net Worth </div>
-                        <div className="individual-summary-value"> { '₹' + this.props.netWorth} </div>
+                        <div className="individual-summary-value"> { this.getNetWorth()} </div>
                     </div>
                     <div className="individual-summary">
                         <div className="individual-summary-title"> P/E Ratio </div>

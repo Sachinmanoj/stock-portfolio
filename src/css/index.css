@@ -81,10 +81,6 @@ CSS for parent component
   -webkit-box-shadow: 7px 7px 0px -4px #c0c0c0; 
 }
 
-.stock-inner-header.portfolio-stand {
-  background: #287DCE;
-}
-
 .stock-inner-header.pick-stock-stand {
   background: #00B3D6;
 }
@@ -104,12 +100,6 @@ CSS for parent component
   z-index: -1;
   width: 40px;
   height: 25px;
-}
-
-.stock-inner-header-shade.portfolio-stand {
-  background: #15569C;
-  transform: translate(-468%, 115%) rotate(50deg);
-  -webkit-transform: translate(-468%, 115%) rotate(50deg);
 }
 
 .stock-inner-header-shade.pick-stock-stand {
@@ -191,6 +181,8 @@ CSS for parent component
   margin-top: 5px;
 }
 
+
+
 .stock-available-container .stock-inidividual-container .stock-inidividual-price {
   font-family: ProximaNova-Light;
   font-size: 24px;
@@ -200,12 +192,31 @@ CSS for parent component
   margin-top: 21px;
 }
 
+.stock-available-container .stock-inidividual-container:hover .stock-inidividual-price {
+  display: none;
+}
+
 .stock-available-container .stock-inidividual-container .stock-inidividual-price span {
   font-family: PingFangSC-Light;
   font-size: 22px;
   color: #666666;
   margin-right:-4px;
 }
+
+.stock-available-container .stock-inidividual-container .stock-inidividual-add {
+  content: url('../asset/addCircle.png');
+  float: right;
+  margin-right: 6%;
+  margin-top: 21px;
+  cursor: pointer;
+  display: none;
+}
+
+.stock-available-container .stock-inidividual-container:hover .stock-inidividual-add {
+  display: initial;
+}
+
+
 
 .stock-details-ctrls .stock-details-prev-btn {
   margin: 7px 1.5% 20px;
@@ -231,19 +242,30 @@ CSS for parent component
 .stock-flex-container.portfolio-stand{
   display: flex;
   padding-top: 55px;
+  padding-bottom: 25px;
+  padding-left: 1.6%;
+}
+
+.stock-inner-header.portfolio-stand {
+  background: #287DCE;
+}
+
+.stock-inner-header-shade.portfolio-stand {
+  background: #15569C;
+  transform: translate(-468%, 115%) rotate(50deg);
+  -webkit-transform: translate(-468%, 115%) rotate(50deg);
 }
 
 
 .portfolio-table-container {
   box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
   -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
-  border-radius: 4px;
-  margin-left: 1.6%;
-  
+  border-radius: 4px;  
   min-width: 450px;
   width: 25%;
   border-collapse: collapse;
-  margin-bottom: 50px;
+  margin: 0 auto 25px;
+  flex: 0 1 auto;
 }
 
 .portfolio-table-container .portfolio-table-header {
@@ -354,6 +376,11 @@ CSS for parent component
 .portfolio-table-container tr th:nth-child(5), 
 .portfolio-table-container tr td:nth-child(5) {
   width: 8%;
+  visibility: hidden;
+}
+
+.portfolio-table-container tr:hover td:nth-child(5) {
+  visibility: visible;
 }
 
 .remove-button {
@@ -404,9 +431,10 @@ CSS for parent component
 
 
 .graph-container {
-  margin-left: 1.6%;
   min-width: 500px;
-  margin-bottom: 50px;
+  margin: 0 auto;
+  flex: 0 1 auto;
+  padding-left: 2%;
 }
 
 .graph-container .graph-header {
@@ -432,11 +460,11 @@ CSS for parent component
 
 
 .summary-container {
-  margin: 75px auto;
-  margin-bottom:  50px;
+  margin: 75px auto 25px;
   min-width: 240px;
   max-width:10%;
   padding-right: 2%;
+  flex: 0 1 auto;
 }
 
 .group-row-summary{
@@ -464,6 +492,8 @@ CSS for parent component
   font-size: 18px;
   color: #FFFFFF;
   text-align: center;
+  cursor: pointer;
+  user-select: none;
 
   display:inline-block;
   width: 80%;
