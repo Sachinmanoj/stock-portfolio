@@ -228,6 +228,12 @@ CSS for parent component
   float: right;
 }    
 
+.stock-details-ctrls .stock-nav-btn[disabled] {
+  pointer-events: none;
+  cursor: default;
+  color: rgb(179, 179, 179);
+}
+
 .stock-details-ctrls .stock-nav-btn {
   font-family: ProximaNova-Semibold;
   font-size: 16px;
