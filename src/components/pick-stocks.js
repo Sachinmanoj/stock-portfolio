@@ -66,15 +66,31 @@ class pickStocks extends Component {
 
     render() {
         return  (
-            <div>
-                <div>PICK STOCKS</div>
-                <div>Showing {this.data.minStockinView} - {this.data.maxStockinView} of {this.getAvailableStocks(this.props).length} matching stocks</div>
-                <Availablestocks 
-                stockdata={this.props.stockdata} 
-                viewableStocks={this.data.viewableStocks} 
-                updatePortfolioHandler={this.props.updatePortfolioHandler.bind(this)} />
-                <PickStocknav counter={-1} text="PREV" disableOn={this.disablePrev()} countUpdateHandler={this.pageSwitchHandler.bind(this)} />
-                <PickStocknav counter={1} text="NEXT" disableOn={this.disableNext()}  countUpdateHandler={this.pageSwitchHandler.bind(this)}/>
+            <div  className="stock-inner-layout">
+                <div className="stock-inner-header pick-stock-stand">
+                    <div className="content"> 
+                        PICK STOCKS
+                    </div>
+                </div>
+                <div className="stock-inner-header-shade pick-stock-stand"> </div>
+                <div className="stock-inner-holder">
+                    <div className="stock-details-ctrls">
+                        <div className="stock-list-details">Showing {this.data.minStockinView} - {this.data.maxStockinView} of {this.getAvailableStocks(this.props).length} matching stocks</div>
+                    </div>
+                    <div className="clear-fix"> </div>
+                    <Availablestocks 
+                        stockdata={this.props.stockdata} 
+                        viewableStocks={this.data.viewableStocks} 
+                        updatePortfolioHandler={this.props.updatePortfolioHandler.bind(this)} />
+                    <div className="stock-details-ctrls"> 
+                        <div className="stock-details-prev-btn">
+                            <PickStocknav counter={-1} text="PREV" disableOn={this.disablePrev()} countUpdateHandler={this.pageSwitchHandler.bind(this)} />
+                        </div>
+                        <div className="stock-details-next-btn"> 
+                            <PickStocknav className="stock-details-next-btn" counter={1} text="NEXT" disableOn={this.disableNext()}  countUpdateHandler={this.pageSwitchHandler.bind(this)}/>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

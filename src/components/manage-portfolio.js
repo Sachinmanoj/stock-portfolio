@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Stocktable from './stock-table';
 import Graphstockstatus from './graph-stock-status';
 import Portfoliosummary from './port-folio-summary';
-import Buildportfolio from './build-portfolio';
 import '../css/manage-portfolio.css';
 
 class managePortfolio extends Component {
@@ -15,9 +14,10 @@ class managePortfolio extends Component {
     }
 
     findInShareDetails(shareDetails, stockId) {
-        return shareDetails.find((share) => {
+        return (shareDetails && 
+        shareDetails.find((share) => {
             return share.stockId === stockId;
-        });
+        }));
     }
 
     updateShareWeights(data, props, state) {
@@ -87,24 +87,36 @@ class managePortfolio extends Component {
 
     render() {
         return  (
-            <div>
-                <Stocktable 
-                portfolioStocks={this.data.portfolioStocks} 
-                stockdata={this.props.stockdata} 
-                shareDetails = {this.state.shareDetails}
-                updateStockCountHandler = {this.updateStockCountHandler.bind(this)}
-                updatePortfolioHandler = {this.props.updatePortfolioHandler.bind(this)}
-                findInShareDetails = {this.findInShareDetails.bind(this)}
-                /> 
-                <Graphstockstatus />
-                <Portfoliosummary 
-                portfolioStocks={this.data.portfolioStocks} 
-                stockdata={this.props.stockdata} 
-                shareDetails = {this.state.shareDetails}
-                findInShareDetails = {this.findInShareDetails.bind(this)}
-                netWorth = {this.data.netWorth}
-                />
-                <Buildportfolio />
+            <div  className="stock-inner-layout">
+                <div className="stock-inner-header portfolio-stand">
+                    <div className="content"> 
+                        MANAGE PORTFOLIO
+                    </div>
+                </div>
+                <div className="stock-inner-header-shade portfolio-stand"> </div>
+                <div className="stock-flex-container stock-inner-holder portfolio-stand">
+                    <Stocktable 
+                    portfolioStocks={this.data.portfolioStocks} 
+                    stockdata={this.props.stockdata} 
+                    shareDetails = {this.state.shareDetails}
+                    updateStockCountHandler = {this.updateStockCountHandler.bind(this)}
+                    updatePortfolioHandler = {this.props.updatePortfolioHandler.bind(this)}
+                    findInShareDetails = {this.findInShareDetails.bind(this)}
+                    /> 
+                    <Graphstockstatus 
+                    portfolioStocks={this.data.portfolioStocks} 
+                    stockdata={this.props.stockdata} 
+                    shareDetails = {this.state.shareDetails}
+                    findInShareDetails = {this.findInShareDetails.bind(this)}
+                    />
+                    <Portfoliosummary 
+                    portfolioStocks={this.data.portfolioStocks} 
+                    stockdata={this.props.stockdata} 
+                    shareDetails = {this.state.shareDetails}
+                    findInShareDetails = {this.findInShareDetails.bind(this)}
+                    netWorth = {this.data.netWorth}
+                    />
+                </div>
             </div>
         );
     }

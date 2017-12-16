@@ -8,7 +8,7 @@ class stockPortfolio extends Component {
     constructor (props) {
         super(props);
         this.state = {};
-        this.state.stockInPortfolio = [];
+        this.state.stockInPortfolio = ["ALAN", "20ML", "III", "KMSS"];
         this.stockdataObj = new StockdataModel();
     }
 
@@ -33,21 +33,24 @@ class stockPortfolio extends Component {
 
     render() {
         return ( 
-            <div>
+            <div className="parent-layout-container">
 
-                <div className="app-header">
-                    smallcase Portfolio Builder 
+                <div className="header-bar-spb"> </div>
+                <div className="layout-container">
+                    <h3 className="app-header">
+                        smallcase Portfolio Builder 
+                    </h3>
+
+                    <Pickstocks
+                    stockdata={this.stockdataObj} 
+                    stockInPortfolio={this.state.stockInPortfolio} 
+                    updatePortfolioHandler={this.addStockToPortfolio.bind(this)}/>
+
+                    <Manageportfolio 
+                    stockdata={this.stockdataObj} 
+                    stockInPortfolio={this.state.stockInPortfolio} 
+                    updatePortfolioHandler={this.removeStockFromPortfolio.bind(this)}/>
                 </div>
-
-                <Pickstocks 
-                stockdata={this.stockdataObj} 
-                stockInPortfolio={this.state.stockInPortfolio} 
-                updatePortfolioHandler={this.addStockToPortfolio.bind(this)}/>
-
-                <Manageportfolio 
-                stockdata={this.stockdataObj} 
-                stockInPortfolio={this.state.stockInPortfolio} 
-                updatePortfolioHandler={this.removeStockFromPortfolio.bind(this)}/>
 
             </div> 
         );

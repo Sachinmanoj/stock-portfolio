@@ -17,15 +17,27 @@ class portfolioSummary extends Component {
 
     render() {
         return  (
-            <div>
-                <div> Stocks </div>
-                <div> {this.props.portfolioStocks.length} </div>
-                <div> Net Worth </div>                
-                <div> {this.props.netWorth} </div>
-                <div> P/E Ratio </div>
-                <div> {this.calculatePERatio()} </div>
-                <div> P/B Ratio </div>
-                <div> {this.calculatePERatio()} </div>
+            <div className="summary-container">
+                <div className="group-row-summary">
+                    <div className="individual-summary">
+                        <div className="individual-summary-title"> Stocks </div>
+                        <div className="individual-summary-value"> {this.props.portfolioStocks.length} </div>
+                    </div>
+                    <div className="individual-summary">
+                        <div className="individual-summary-title"> Net Worth </div>
+                        <div className="individual-summary-value"> { '₹' + this.props.netWorth} </div>
+                    </div>
+                    <div className="individual-summary">
+                        <div className="individual-summary-title"> P/E Ratio </div>
+                        <div className="individual-summary-value"> {this.calculatePERatio()} </div>
+                    </div>
+                    <div className="individual-summary">
+                        <div className="individual-summary-title"> P/B Ratio </div>
+                        <div className="individual-summary-value"> {this.calculatePERatio()} </div>
+                    </div>
+                </div>
+                <div className="clear-fix"> </div>
+                <div className="build-btn"> BUILD PORTFOLIO</div>
             </div>
         );
     }
