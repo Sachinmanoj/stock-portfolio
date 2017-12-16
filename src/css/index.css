@@ -146,17 +146,13 @@ CSS for parent component
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .stock-flex-container * {
   flex: 1 1 auto;
 }
 
-.stock-flex-container.portfolio-stand{
-  display: flex;
-  padding-top: 55px;
-}
+
 
 .stock-flex-container.stock-available-container {
   min-height: 200px;
@@ -232,12 +228,18 @@ CSS for parent component
 
 
 
+.stock-flex-container.portfolio-stand{
+  display: flex;
+  padding-top: 55px;
+}
+
 
 .portfolio-table-container {
   box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
   -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.20);
   border-radius: 4px;
   margin-left: 1.6%;
+  
   min-width: 450px;
   width: 25%;
   border-collapse: collapse;
@@ -432,9 +434,9 @@ CSS for parent component
 .summary-container {
   margin: 75px auto;
   margin-bottom:  50px;
-  min-width: 300px;
+  min-width: 240px;
   max-width:10%;
-  padding: 0 5%;
+  padding-right: 2%;
 }
 
 .group-row-summary{
