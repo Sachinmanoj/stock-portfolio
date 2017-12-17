@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: 'border-box';
+  user-select: none;
 }
 
 html {
@@ -131,6 +132,54 @@ CSS for parent component
 
 .stock-details-ctrls .stock-list-details .no-data {
   color: rgb(255, 0, 0);
+}
+
+
+
+.stock-details-ctrls .apply-filter-container {
+  margin : 28px 2.6% 20px 0;
+  float: right;
+}
+
+.stock-details-ctrls .apply-filter-ctrl {
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px 0 rgba(0,0,0,0.30);
+  -webkit-box-shadow: 0 1px 4px 0 rgba(0,0,0,0.30);
+  border-radius: 2px;
+  display: inline-block;
+  padding: 8px 0;
+  width: 110%;
+  cursor: pointer;
+}
+
+.stock-details-ctrls .apply-filter-ctrl span{
+  display: inline-block;
+  font-family: ProximaNova-Semibold;
+  font-size: 16px;
+  color: #00A9D2;
+  padding-left: 7%;
+  padding-right: 15%;
+}
+
+.stock-details-ctrls .apply-filter-ctrl .filter-image{
+  display: inline-block;
+  position: relative;
+  top: 4px;
+  left: 8px;
+  content: url('../asset/filterFontAwesome.png');
+}
+
+.stock-details-ctrls .apply-filter-ctrl .filter-count{
+  display: inline-block;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  line-height: 21px;
+  font-family: ProximaNova-Semibold;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  background-color: #009FCE;
+  text-align: center;
 }
 
 
@@ -357,7 +406,14 @@ CSS for parent component
   width: 33%;
   color: #287DCE;
   font-size: 16px;  
+  font-weight: bold;
   user-select: none;
+}
+
+.portfolio-table-container tr td .share-ctrls div[disabled] {
+  pointer-events: none;
+  cursor: default;
+  color: rgb(179, 179, 179);
 }
 
 .portfolio-table-container tr td .share-ctrls .neg-btn {
@@ -525,4 +581,100 @@ CSS for parent component
   font-size: 22px;
   color: #101010;
   line-height: 26px;
+}
+
+
+/* Pop up */
+
+/* The actual popup (appears on top) */
+.popup-container {
+  width: 30%;
+  background-color: rgb(243, 243, 243);
+  box-shadow: rgb(114, 196, 234) 0px 0px 7px 7px; 
+  -webkit-box-shadow: rgb(114, 196, 234) 0px 0px 7px 7px;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 3;
+  left: 71.8%;
+  top: 900%;
+  margin-left: -80px;
+}
+
+.popup-container fieldset {
+  border:none;
+  background-color:rgb(255, 255, 255);
+}
+
+.popup-container h3 {
+  font-family: ProximaNova-Semibold;
+  font-size: 18px;
+  color: #287DCE;
+  margin: 12px 0 5px 12px;
+}
+
+.popup-container .filter-holder {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin-left: 12px;
+}
+
+.popup-container .filter-holder * {
+  flex: 1 1 auto;
+}
+
+.popup-container .filter-holder div {
+  font-family: ProximaNova-Light;
+  font-size: 18px;
+  color: #101010;
+  line-height: 26px;
+  padding: 5px;
+  max-width: 30%;
+  min-width: 20%;
+}
+
+
+.popup-container .filter-holder input[type="checkbox"] {
+  display:inline-block;
+  width:15px;
+  height:15px;
+  margin:-2px 10px 0 0;
+  vertical-align:middle;
+  cursor:pointer;
+}
+
+/* Popup arrow */
+.popup-container::after {
+  content: "";
+  position: absolute;
+  top: -17px;
+  left: 95%;
+  margin-left: -30px;
+  border-width: 8px;
+  border-style: solid;
+  transform: rotate(180deg);
+  border-color: #555 transparent transparent transparent;  
+}
+
+.popup-container.show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s
+}
+
+.popup-container.hide {
+  visibility: hidden;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
 }

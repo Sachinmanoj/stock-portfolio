@@ -5,16 +5,19 @@ export default {
             "label": "Capitalization",
             "filters": [
                 {
-                    "id": "lowCap",
-                    "label": "Low cap"
+                    "id": "smallCap",
+                    "label": "Small cap",
+                    "value": true
                 },
                 {
                     "id": "midCap",
-                    "label": "Mid cap"
+                    "label": "Mid cap",
+                    "value": true
                 },
                 {
                     "id": "largeCap",
-                    "label": "Large cap"
+                    "label": "Large cap",
+                    "value": true
                 }
             ]
         },
@@ -23,16 +26,14 @@ export default {
             "label": "Sectors",
             "filters": [
                 {
-                    "id": "finance",
-                    "label": "Finance"
+                    "id": "finance Service",
+                    "label": "Finance",
+                    "value": true
                 },
                 {
-                    "id": "retail",
-                    "label": "Retail"
-                },
-                {
-                    "id": "healthcare",
-                    "label": "Health care"
+                    "id": "medical Service",
+                    "label": "Medical",
+                    "value": true
                 }
             ]
         }

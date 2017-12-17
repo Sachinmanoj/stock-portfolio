@@ -12,6 +12,14 @@ class stockTable extends Component {
         return '₹' + utils.toRupeeFormat(this.props.stockdata.getPriceOfStock(stockId));
     }
 
+    checkMinShareLimit(shareCount) {
+        return shareCount === 1;
+    }
+
+    checkMaxShareLimit(shareCount) {
+        return shareCount === 19;
+    }
+
     render() {
 
         let stockRows = this.props.portfolioStocks.map(stock => {
@@ -21,9 +29,9 @@ class stockTable extends Component {
                 <td> {this.getPriceOfStock(stock.stockId)} </td>
                 <td> 
                     <div  className="share-ctrls">
-                        <div className="neg-btn" onClick={this.props.updateStockCountHandler.bind(this, stock.stockId, -1)}> - </div> 
+                        <div className="neg-btn" disabled={this.checkMinShareLimit(shareDetail.shareCount)} onClick={this.props.updateStockCountHandler.bind(this, stock.stockId, -1)}> - </div> 
                         <span >{shareDetail.shareCount} </span>
-                        <div className="pos-btn" onClick={this.props.updateStockCountHandler.bind(this, stock.stockId, 1)}> + </div> 
+                        <div className="pos-btn" disabled={this.checkMaxShareLimit(shareDetail.shareCount)} onClick={this.props.updateStockCountHandler.bind(this, stock.stockId, 1)}> + </div> 
                     </div>
                 </td>
                 <td> {utils.toFixedDecimal(stock.weight) + '%'} </td>

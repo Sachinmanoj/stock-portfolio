@@ -11,6 +11,7 @@ class pickStocks extends Component {
         this.appdataObj = new AppdataModel();
         this.state = {};
         this.state.page = 1;
+        this.state.filterCategoryList = this.appdataObj.getFilterCatogories();
         this.data = {};
         this.data.viewableStocks = this.getViewableStocklist(this.props, this.state);
         this.data.minStockinView = this.getMinStockinView(this.state);
@@ -30,21 +31,46 @@ class pickStocks extends Component {
     }
 
     pageSwitchHandler(counter) {
-        this.setState(function (prevState, props) {
+        this.setState((prevState, props) => {
             let nextState = {};
             nextState.page = prevState.page + counter;
             return nextState;
         }); 
     }
 
-    getAvailableStocks(props) {
-        return  props.stockdata.getStockList().filter((stock)=> {
+    findFilterObj(filterCategories, filterId, filterCategoryId) {
+        let filterCategory = filterCategories.find((category) => {
+            return (filterCategoryId === category.id);
+        });
+        return filterCategory.filters.find((filter) => {
+            return (filterId === filter.id);
+        });
+    }
+
+    handleFilterCtrl(filterId, filterCategoryId) {
+        this.setState((prevState, props) => {
+            let nextState = {};
+            nextState.page = 1;
+            let filterObj = this.findFilterObj(prevState.filterCategoryList, filterId, filterCategoryId);
+            filterObj.value = !filterObj.value;
+            nextState.filterCategoryList = prevState.filterCategoryList.slice(0);
+            return nextState;
+        }); 
+    }
+
+    getAvailableStocks(props, state) {
+        return  props.stockdata.getStockList().filter((stock) => {
+            return state.filterCategoryList.every((filterCat) => {
+                let id = stock[filterCat.id];
+                return this.findFilterObj(state.filterCategoryList, id, filterCat.id).value;
+            });
+        }).filter((stock)=> {
             return (props.stockInPortfolio.indexOf(stock.stockId) === -1);
         });
     }
 
     getViewableStocklist(props, state) {
-        let stocks = this.getAvailableStocks(props);  
+        let stocks = this.getAvailableStocks(props, state);  
         var min = this.getPrevPageStockLength(state);
         var max = min + this.appdataObj.getMaxStockTileInView();
         return stocks.slice(min, max);
@@ -53,7 +79,7 @@ class pickStocks extends Component {
     pageSwitchForNoStocks(props, state) {
         this.data.viewableStocks = this.getViewableStocklist(props, state);
         if(this.data.viewableStocks.length === 0 && state.page > 1) {
-            this.pageSwitchHandler(-1)
+            this.pageSwitchHandler(-1);
         }
     }
 
@@ -72,13 +98,13 @@ class pickStocks extends Component {
     }
 
     disableNext() {
-        return this.data.maxStockinView === this.getAvailableStocks(this.props).length;
+        return this.data.maxStockinView === this.getAvailableStocks(this.props, this.state).length;
     }
 
     render() {
 
         let dataAvailability;
-        let availability = this.getAvailableStocks(this.props).length;
+        let availability = this.getAvailableStocks(this.props, this.state).length;
         let viewable = this.data.viewableStocks.length;
         if(viewable > 1) {
             dataAvailability = "Showing " + this.data.minStockinView + " - "+ this.data.maxStockinView + " of " + availability + " matching stocks";
@@ -103,6 +129,12 @@ class pickStocks extends Component {
                         <div className="stock-list-details">
                             {dataAvailability}
                         </div>
+                        <Applyfilter 
+                            stockdata={this.props.stockdata} 
+                            filterCategoryList={this.state.filterCategoryList} 
+                            viewableStocks={this.data.viewableStocks} 
+                            handleFilterCtrl={this.handleFilterCtrl.bind(this)} > 
+                        </Applyfilter>
                     </div>
                     <div className="clear-fix"> </div>
                     <Availablestocks 

@@ -8,6 +8,10 @@ class AppdataModel {
     getAppData() {
         return Appdata;
     }
+
+    getFilterCatogories() {
+        return Appdata.filterCategories;
+    }
 }
 
 export default AppdataModel;
