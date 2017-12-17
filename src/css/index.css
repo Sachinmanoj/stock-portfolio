@@ -129,6 +129,10 @@ CSS for parent component
   color: #00A9D2;
 }
 
+.stock-details-ctrls .stock-list-details .no-data {
+  color: rgb(255, 0, 0);
+}
+
 
 
 .stock-flex-container {
@@ -156,7 +160,7 @@ CSS for parent component
   border-radius: 4px;
   margin: 8px 1.6%;
   width: 20%;
-  max-width: 23%;
+  max-width: 20%;
   max-height: 90px;
 }
 
@@ -443,6 +447,10 @@ CSS for parent component
   padding-left: 2%;
 }
 
+.graph-container * {
+  z-index: 1;
+}
+
 .graph-container .graph-header {
   font-family: ProximaNova-Semibold;
   font-size: 24px;
@@ -514,7 +522,7 @@ CSS for parent component
 
 .individual-summary-value {
   font-family: ProximaNova-Light;
-  font-size: 24px;
+  font-size: 22px;
   color: #101010;
   line-height: 26px;
 }

@@ -50,6 +50,17 @@ class pickStocks extends Component {
         return stocks.slice(min, max);
     }
 
+    pageSwitchForNoStocks(props, state) {
+        this.data.viewableStocks = this.getViewableStocklist(props, state);
+        if(this.data.viewableStocks.length === 0 && state.page > 1) {
+            this.pageSwitchHandler(-1)
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.pageSwitchForNoStocks(nextProps, this.state);
+    }
+
     componentWillUpdate(nextProps, nextState) {
         this.data.viewableStocks = this.getViewableStocklist(nextProps, nextState);
         this.data.minStockinView = this.getMinStockinView(nextState);
@@ -65,6 +76,20 @@ class pickStocks extends Component {
     }
 
     render() {
+
+        let dataAvailability;
+        let availability = this.getAvailableStocks(this.props).length;
+        let viewable = this.data.viewableStocks.length;
+        if(viewable > 1) {
+            dataAvailability = "Showing " + this.data.minStockinView + " - "+ this.data.maxStockinView + " of " + availability + " matching stocks";
+        }
+        else if (viewable === 1) {
+            dataAvailability = "Showing " + this.data.maxStockinView + " of " + availability + " matching stocks";
+        }
+        else if (viewable === 0 && this.state.page === 1) {
+            dataAvailability = <span className="no-data"> { "No matching stocks" } </span>;
+        }
+
         return  (
             <div  className="stock-inner-layout">
                 <div className="stock-inner-header pick-stock-stand">
@@ -75,7 +100,9 @@ class pickStocks extends Component {
                 <div className="stock-inner-header-shade pick-stock-stand"> </div>
                 <div className="stock-inner-holder">
                     <div className="stock-details-ctrls">
-                        <div className="stock-list-details">Showing {this.data.minStockinView} - {this.data.maxStockinView} of {this.getAvailableStocks(this.props).length} matching stocks</div>
+                        <div className="stock-list-details">
+                            {dataAvailability}
+                        </div>
                     </div>
                     <div className="clear-fix"> </div>
                     <Availablestocks 

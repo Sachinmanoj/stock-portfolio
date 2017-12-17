@@ -14,6 +14,9 @@ class portfolioSummary extends Component {
         if(this.calculateSumEarnings() !== 0 ){
             return utils.toFixedDecimal((this.props.netWorth / this.calculateSumEarnings()));
         }
+        else {
+            return 0;
+        }
     }
     
     getNetWorth() {
