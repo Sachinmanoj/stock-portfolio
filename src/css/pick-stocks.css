@@ -1,0 +1,416 @@
+/** 
+ * PICK STOCK PANEL
+ */
+
+.stock-inner-layout {
+    margin: 2% auto 0;
+}
+
+.stock-inner-header {
+    display: inline-block;
+    position: relative;
+    padding: 8px 16px;
+    z-index: 2;
+    box-shadow: 7px 7px 0px -4px #c0c0c0;
+    -webkit-box-shadow: 7px 7px 0px -4px #c0c0c0;
+}
+
+.stock-inner-header.pick-stock-stand {
+    background: #00B3D6;
+}
+
+.stock-inner-header .content {
+    font-family: ProximaNova-Semibold;
+    font-size: 16px;
+    color: #FFFFFF;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.stock-inner-header-shade {
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+    width: 40px;
+    height: 25px;
+}
+
+.stock-inner-header-shade.pick-stock-stand {
+    background: #098DAD;
+    transform: translate(-322.5%, 115%) rotate(50deg);
+    -webkit-transform: translate(-322.5%, 115%) rotate(50deg);
+}
+
+.stock-inner-holder.pick-stock {
+    overflow: initial;
+    height: 350px;
+}
+
+.stock-details-ctrls {
+    display: block;
+    position: relative;
+    padding: 10px 0 0 0;
+}
+
+.stock-details-ctrls .stock-list-details {
+    margin: 40px 1.5% 20px;
+    float: left;
+    font-family: ProximaNova-Semibold;
+    font-size: 16px;
+    color: #00A9D2;
+}
+
+.stock-details-ctrls .stock-list-details .no-data {
+    color: rgb(255, 0, 0);
+}
+
+
+/**
+ * APPLY FILTER CONTROL and POP UP 
+ */
+
+.stock-details-ctrls .apply-filter-container {
+    margin: 28px 2.6% 20px 0;
+    float: right;
+}
+
+.stock-details-ctrls .apply-filter-ctrl {
+    background: #FFFFFF;
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.30);
+    border-radius: 2px;
+    display: inline-block;
+    padding: 8px 0;
+    width: 110%;
+    cursor: pointer;
+}
+
+.stock-details-ctrls .apply-filter-ctrl span {
+    display: inline-block;
+    font-family: ProximaNova-Semibold;
+    font-size: 16px;
+    color: #00A9D2;
+    padding-left: 7%;
+    padding-right: 15%;
+}
+
+.stock-details-ctrls .apply-filter-ctrl .filter-image {
+    display: inline-block;
+    position: relative;
+    top: 4px;
+    left: 8px;
+    content: url('../asset/filterFontAwesome.png');
+}
+
+.stock-details-ctrls .apply-filter-ctrl .filter-count {
+    display: inline-block;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 21px;
+    font-family: ProximaNova-Semibold;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    background-color: #009FCE;
+    text-align: center;
+}
+
+.popup-container {
+    width: 30%;
+    background-color: rgb(243, 243, 243);
+    box-shadow: rgb(114, 196, 234) 0px 0px 7px 7px;
+    -webkit-box-shadow: rgb(114, 196, 234) 0px 0px 7px 7px;
+    border-radius: 6px;
+    padding: 10px;
+    position: absolute;
+    z-index: 3;
+    left: 71.8%;
+    top: 900%;
+    margin-left: -80px;
+}
+
+.popup-container fieldset {
+    border: none;
+    background-color: rgb(255, 255, 255);
+}
+
+.popup-container h3 {
+    font-family: ProximaNova-Semibold;
+    font-size: 18px;
+    color: #287DCE;
+    margin: 12px 0 5px 12px;
+}
+
+.popup-container .filter-holder {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin-left: 12px;
+}
+
+.popup-container .filter-holder * {
+    flex: 1 1 auto;
+}
+
+.popup-container .filter-holder div {
+    font-family: ProximaNova-Light;
+    font-size: 18px;
+    color: #101010;
+    line-height: 26px;
+    padding: 5px;
+    max-width: 30%;
+    min-width: 20%;
+}
+
+.popup-container .filter-holder input[type="checkbox"] {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+
+/* Popup arrow */
+
+.popup-container::after {
+    content: "";
+    position: absolute;
+    top: -17px;
+    left: 95%;
+    margin-left: -30px;
+    border-width: 8px;
+    border-style: solid;
+    transform: rotate(180deg);
+    border-color: #555 transparent transparent transparent;
+}
+
+.popup-container.show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+.popup-container.hide {
+    visibility: hidden;
+}
+
+
+/* Add animation (fade in the popup) */
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/** 
+ * AVAILABLE STOCK CONTAINER 
+ */
+
+.stock-flex-container.stock-available-container {
+    min-height: 200px;
+}
+
+.stock-available-container .stock-inidividual-container {
+    display: inline-block;
+    background: #FFFFFF;
+    position: relative;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.20);
+    -webkit-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.20);
+    border-radius: 4px;
+    margin: 8px 1.6%;
+    width: 20%;
+    max-width: 20%;
+    max-height: 90px;
+}
+
+.stock-available-container .stock-inidividual-container .stock-inidividual-name {
+    font-family: ProximaNova-Semibold;
+    font-size: 16px;
+    color: #666666;
+    line-height: 16px;
+    float: left;
+    margin-left: 7%;
+    margin-top: 25px;
+    margin-right: -10%;
+}
+
+.stock-available-container .stock-inidividual-container .stock-inidividual-sector {
+    font-family: ProximaNova-Semibold;
+    font-size: 12px;
+    color: #89A6EC;
+    line-height: 12px;
+    float: left;
+    margin-left: 1%;
+    margin-top: 5px;
+}
+
+.stock-available-container .stock-inidividual-container .stock-inidividual-price {
+    font-family: ProximaNova-Light;
+    font-size: 20px;
+    color: #666666;
+    float: right;
+    margin-right: 6%;
+    margin-top: 21px;
+}
+
+.stock-available-container .stock-inidividual-container:hover .stock-inidividual-price {
+    display: none;
+}
+
+.stock-available-container .stock-inidividual-container .stock-inidividual-price span {
+    font-family: PingFangSC-Light;
+    font-size: 20px;
+    color: #666666;
+    margin-right: -4px;
+}
+
+.stock-available-container .stock-inidividual-container .stock-inidividual-add {
+    content: url('../asset/addCircle.png');
+    float: right;
+    margin-right: 6%;
+    margin-top: 21px;
+    cursor: pointer;
+    display: none;
+}
+
+.stock-available-container .stock-inidividual-container:hover .stock-inidividual-add {
+    display: initial;
+}
+
+
+/**
+ * MEDIA SCREEN FOR AVAILABLE STOCK CONTAINER 
+ */
+
+@media screen and (max-width: 1200px) and (min-width: 1100px) {
+    .stock-available-container .stock-inidividual-container .stock-inidividual-price {
+        font-family: ProximaNova-Light;
+        font-size: 14px;
+        color: #666666;
+        float: right;
+        margin-right: 3%;
+        margin-top: 16px;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-price span {
+        font-family: PingFangSC-Light;
+        font-size: 14px;
+        color: #666666;
+        margin-right: -4px;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-name {
+        font-family: ProximaNova-Semibold;
+        font-size: 14px;
+        color: #666666;
+        line-height: 16px;
+        float: left;
+        margin-left: 7%;
+        margin-top: 18px;
+        margin-right: -10%;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-add {
+        content: url('../asset/addCircle.png');
+        float: right;
+        margin-right: 6%;
+        margin-top: 16px;
+        cursor: pointer;
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1100px) {
+    .stock-available-container .stock-inidividual-container .stock-inidividual-price {
+        display: block;
+        font-family: ProximaNova-Light;
+        font-size: 14px;
+        color: #666666;
+        float: none;
+        margin-left: 7%;
+        margin-top: 7px;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-price span {
+        font-family: PingFangSC-Light;
+        font-size: 14px;
+        color: #666666;
+        margin-right: -4px;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-name {
+        display: block;
+        font-family: ProximaNova-Semibold;
+        font-size: 14px;
+        color: #666666;
+        line-height: 16px;
+        float: none;
+        margin-left: 7%;
+        margin-top: 13px;
+        margin-right: -10%;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-sector {
+        display: block;
+        font-family: ProximaNova-Semibold;
+        font-size: 12px;
+        color: #89A6EC;
+        line-height: 12px;
+        float: none;
+        margin-left: 1%;
+        margin-top: 5px;
+    }
+    .stock-available-container .stock-inidividual-container .stock-inidividual-add {
+        content: url('../asset/addCircle.png');
+        position: absolute;
+        bottom: 3px;
+        right: 0px;
+        width: auto;
+        height: 30%;
+        cursor: pointer;
+        display: none;
+        margin-right: 1%;
+    }
+}
+
+
+/**
+ * PREV and NEXT CTRLS
+ */
+
+.stock-details-ctrls .stock-details-prev-btn {
+    margin: 7px 1.5% 20px;
+    float: left;
+}
+
+.stock-details-ctrls .stock-details-next-btn {
+    margin: 7px 1.5% 20px;
+    float: right;
+}
+
+.stock-details-ctrls .stock-nav-btn[disabled] {
+    pointer-events: none;
+    cursor: default;
+    color: rgb(179, 179, 179);
+}
+
+.stock-details-ctrls .stock-nav-btn {
+    font-family: ProximaNova-Semibold;
+    font-size: 16px;
+    color: #00A9D2;
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+}

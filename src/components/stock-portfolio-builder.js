@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Pickstocks from './pick-stocks';
 import Manageportfolio from './manage-portfolio';
 import StockdataModel from '../model/stock-data-model';
-import '../css/stock-portfolio-builder.css';
 
 class stockPortfolio extends Component {
     constructor (props) {
