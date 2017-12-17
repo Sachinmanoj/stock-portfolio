@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import * as d3 from 'd3';
+import utils from '../utils/utils-service';
+
 class graphStockStatus extends Component {
 
     graphRegion() {
@@ -18,11 +20,15 @@ class graphStockStatus extends Component {
             .append('svg')
                 .attr('id', 'stockGraphPlot')
                 .attr('width', graphOptions.width)
-                .attr('height', graphOptions.height);
+                .attr('height', graphOptions.height);                
     }
 
     getGraphRegion() {
         return d3.select('#stockGraphPlot');
+    }
+
+    getGraphSVG() {
+        return d3.select('#stockGraph svg');
     }
 
     calcNetWorthInTime(props, time) {
@@ -120,6 +126,43 @@ class graphStockStatus extends Component {
             .attr('fill', '#82AFE4')
             .attr('fill-opacity', 0.7);
     }
+    
+    
+    tooltip(plotData, scale) {
+        var graphHolder = this.getGraphRegion();
+        var getGraphSVG = this.getGraphSVG();
+        var graphOptions = this.graphRegion();
+        var graphMaxWidth = graphOptions.width - graphOptions.padding;
+        var graphMinWidth = graphOptions.padding;
+        var bisector = d3.bisector(function(d) { return d.time; }).left;
+        var focus = graphHolder.append("g")
+                        .attr("class", "focus")
+                        .style("display", "none");
+
+        focus.append("circle")
+            .attr("r", 4.5)
+            .attr('fill', '#15569C');
+        focus.append("text")
+            .attr("dx", "-1em")
+            .attr("dy", "-1em")
+            .attr('fill', '#15569C');
+
+        getGraphSVG.on("mouseover", function() { focus.style("display", null); })
+            .on("mouseout", function() { focus.style("display", "none"); })
+            .on("mousemove", function () {
+                let xpointer = d3.mouse(this)[0];
+                if(xpointer >= graphMinWidth &&  xpointer <= graphMaxWidth) {
+                    var x0 = scale.xScale.invert(d3.mouse(this)[0]),
+                    i = bisector(plotData, x0, 1),
+                    d0 = plotData[i - 1],
+                    d1 = plotData[i],
+                    d = x0 - d0.time > d1.time - x0 ? d1 : d0;
+                    focus.attr("transform", "translate(" + scale.xScale(d.time) + "," + scale.yScale(d.netWorth) + ")");
+                    focus.select("text").text(utils.toRupeeFormat(d.netWorth));                
+                }
+            })
+        
+    }
 
     updateGraphPlot(props) {
         var plotData = this.constructPlotData(props);
@@ -127,6 +170,7 @@ class graphStockStatus extends Component {
         this.setGraphAxis(scale);
         this.drawLine(plotData, scale);
         this.drawArea(plotData, scale);
+        this.tooltip(plotData, scale);
     }
     
     render() {
