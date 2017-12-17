@@ -15,7 +15,7 @@ class availableStocks extends Component {
                     <div  className="stock-inidividual-sector"> {stock.sector} </div>
                 </div>
                 <div className="stock-inidividual-price"> <span>₹</span> {this.getPriceOfStock(stock.stockId)} </div>
-                <div className="stock-inidividual-add" onClick={this.props.updatePortfolioHandler.bind(this, stock.stockId)}> + </div>
+                <div className="stock-inidividual-add" onClick={this.props.updatePortfolioHandler.bind(this, stock.stockId)}></div>
             </li>);
         })
         return  (

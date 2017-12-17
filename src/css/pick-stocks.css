@@ -2,49 +2,10 @@
  * PICK STOCK PANEL
  */
 
-.stock-inner-layout {
-    margin: 2% auto 0;
-}
-
-.stock-inner-header {
-    display: inline-block;
-    position: relative;
-    padding: 8px 16px;
-    z-index: 2;
-    box-shadow: 7px 7px 0px -4px #c0c0c0;
-    -webkit-box-shadow: 7px 7px 0px -4px #c0c0c0;
-}
-
-.stock-inner-header.pick-stock-stand {
-    background: #00B3D6;
-}
-
-.stock-inner-header .content {
-    font-family: ProximaNova-Semibold;
-    font-size: 16px;
-    color: #FFFFFF;
-    line-height: 18px;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-.stock-inner-header-shade {
-    display: inline-block;
-    position: absolute;
-    z-index: -1;
-    width: 40px;
-    height: 25px;
-}
-
-.stock-inner-header-shade.pick-stock-stand {
-    background: #098DAD;
-    transform: translate(-322.5%, 115%) rotate(50deg);
-    -webkit-transform: translate(-322.5%, 115%) rotate(50deg);
-}
 
 .stock-inner-holder.pick-stock {
     overflow: initial;
-    height: 350px;
+    height: 370px;
 }
 
 .stock-details-ctrls {
@@ -82,24 +43,28 @@
     border-radius: 2px;
     display: inline-block;
     padding: 8px 0;
-    width: 110%;
+    width: 120%;
     cursor: pointer;
+    position: relative;
+    right: 25px;
 }
 
 .stock-details-ctrls .apply-filter-ctrl span {
     display: inline-block;
     font-family: ProximaNova-Semibold;
     font-size: 16px;
-    color: #00A9D2;
-    padding-left: 7%;
+    color: #00A9D2;    
+    float: left;
+    padding-left: 15%;
     padding-right: 15%;
 }
 
-.stock-details-ctrls .apply-filter-ctrl .filter-image {
+.stock-details-ctrls .apply-filter-ctrl .filter-image::before {
     display: inline-block;
-    position: relative;
-    top: 4px;
+    position: absolute;
+    top: 9px;
     left: 8px;
+    float: left;
     content: url('../asset/filterFontAwesome.png');
 }
 
@@ -110,7 +75,11 @@
     height: 20px;
     line-height: 21px;
     font-family: ProximaNova-Semibold;
-    font-size: 14px;
+    font-size: 14px; 
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    float: right;
     color: rgb(255, 255, 255);
     background-color: #009FCE;
     text-align: center;
@@ -282,7 +251,7 @@
     margin-right: -4px;
 }
 
-.stock-available-container .stock-inidividual-container .stock-inidividual-add {
+.stock-available-container .stock-inidividual-container .stock-inidividual-add::before {
     content: url('../asset/addCircle.png');
     float: right;
     margin-right: 6%;
@@ -291,7 +260,7 @@
     display: none;
 }
 
-.stock-available-container .stock-inidividual-container:hover .stock-inidividual-add {
+.stock-available-container .stock-inidividual-container:hover .stock-inidividual-add::before {
     display: initial;
 }
 
@@ -325,7 +294,7 @@
         margin-top: 18px;
         margin-right: -10%;
     }
-    .stock-available-container .stock-inidividual-container .stock-inidividual-add {
+    .stock-available-container .stock-inidividual-container .stock-inidividual-add::before {
         content: url('../asset/addCircle.png');
         float: right;
         margin-right: 6%;
@@ -372,7 +341,7 @@
         margin-left: 1%;
         margin-top: 5px;
     }
-    .stock-available-container .stock-inidividual-container .stock-inidividual-add {
+    .stock-available-container .stock-inidividual-container .stock-inidividual-add::before {
         content: url('../asset/addCircle.png');
         position: absolute;
         bottom: 3px;

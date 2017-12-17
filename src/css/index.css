@@ -79,6 +79,11 @@ CSS for parent component
     visibility: hidden;
 }
 
+
+/**
+ * PANEL CONTAINER
+ */
+
 .stock-inner-holder {
     background-color: #ffffff;
     margin: -23px 0 0 11px;
@@ -95,4 +100,49 @@ CSS for parent component
 
 .stock-flex-container * {
     flex: 1 1 auto;
+}
+
+.stock-inner-layout {
+    margin: 25px auto 0;
+}
+
+
+/**
+ * HEADER CONTAINER
+ */
+
+.stock-inner-header {
+    display: inline-block;
+    position: relative;
+    padding: 8px 16px;
+    z-index: 2;
+    box-shadow: 7px 7px 0px -4px #c0c0c0;
+    -webkit-box-shadow: 7px 7px 0px -4px #c0c0c0;
+}
+
+.stock-inner-header.pick-stock-stand {
+    background: #00B3D6;
+}
+
+.stock-inner-header .content {
+    font-family: ProximaNova-Semibold;
+    font-size: 16px;
+    color: #FFFFFF;
+    line-height: 18px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.stock-inner-header-shade {
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+    width: 40px;
+    height: 25px;
+}
+
+.stock-inner-header-shade.pick-stock-stand {
+    background: #098DAD;
+    transform: translate(-322.5%, 115%) rotate(50deg);
+    -webkit-transform: translate(-322.5%, 115%) rotate(50deg);
 }

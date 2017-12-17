@@ -84,7 +84,7 @@
 
 .portfolio-table-container tr th:nth-child(3),
 .portfolio-table-container tr td:nth-child(3) {
-    width: 30%;
+    width: 34%;
 }
 
 .portfolio-table-container tr td .share-ctrls {
@@ -159,8 +159,11 @@
     cursor: pointer;
     user-select: none;
     float: right;
-    content: url('../asset/cancel.png');
-    ;
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    line-height: 12px;
+    text-align: center;
 }
 
 .portfolio-table-container .empty-row {
