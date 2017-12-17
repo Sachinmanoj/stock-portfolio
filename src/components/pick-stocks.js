@@ -124,7 +124,7 @@ class pickStocks extends Component {
                     </div>
                 </div>
                 <div className="stock-inner-header-shade pick-stock-stand"> </div>
-                <div className="stock-inner-holder">
+                <div className="stock-inner-holder pick-stock">
                     <div className="stock-details-ctrls">
                         <div className="stock-list-details">
                             {dataAvailability}
