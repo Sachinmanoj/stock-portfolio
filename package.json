@@ -1,6 +1,6 @@
 {
   "name": "stock-portfolio",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "d3": "^4.12.0",
