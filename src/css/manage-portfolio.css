@@ -125,6 +125,12 @@
     float: left;
 }
 
+.portfolio-table-container tr td .share-ctrls .neg-btn:active,
+.portfolio-table-container tr td .share-ctrls .pos-btn:active {
+    animation: btn-click-effect 2s;
+    -webkit-animation: btn-click-effect 2s;
+}
+
 .portfolio-table-container tr td .share-ctrls .pos-btn {
     border-left: 1px solid #DDDDDD;
     float: right;

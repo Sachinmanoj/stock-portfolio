@@ -5,6 +5,7 @@
   "dependencies": {
     "d3": "^4.12.0",
     "react": "^16.2.0",
+    "react-count-animation": "^1.1.2",
     "react-dom": "^16.2.0",
     "react-scripts": "1.0.17"
   },
