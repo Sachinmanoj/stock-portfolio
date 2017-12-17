@@ -4,9 +4,33 @@
 
 .stock-flex-container.portfolio-stand {
     display: flex;
+    position: relative;
     padding-top: 55px;
     padding-bottom: 25px;
     padding-left: 1.6%;
+}
+
+.stock-flex-container-overlay {
+    position:absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 3;
+    color: #ffffff;
+}
+
+.stock-flex-container-overlay.hide {  
+    /* -webkit-animation: moveToBottom 1s ease both;
+	animation: moveToBottom 1s ease both; */
+    display:none;
+}
+
+.stock-flex-container-overlay.show {
+    /* -webkit-animation: moveToTop 1s ease both;
+	animation: moveToTop 1s ease both; */
+    display: block;
 }
 
 .stock-inner-header.portfolio-stand {
@@ -188,6 +212,7 @@
     width: 100%;
     table-layout: fixed;
 }
+
 
 
 /**

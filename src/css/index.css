@@ -106,6 +106,13 @@ CSS for parent component
     margin: 25px auto 0;
 }
 
+/*This will work for firefox*/
+@-moz-document url-prefix() {
+    .stock-inner-layout{
+        min-width: 900px;
+    }
+}
+
 
 /**
  * HEADER CONTAINER
@@ -115,7 +122,7 @@ CSS for parent component
     display: inline-block;
     position: relative;
     padding: 8px 16px;
-    z-index: 2;
+    z-index: 4;
     box-shadow: 7px 7px 0px -4px #c0c0c0;
     -webkit-box-shadow: 7px 7px 0px -4px #c0c0c0;
 }
@@ -146,6 +153,13 @@ CSS for parent component
     transform: translate(-322.5%, 115%) rotate(50deg);
     -webkit-transform: translate(-322.5%, 115%) rotate(50deg);
 }
+
+.scale-animation {
+    -webkit-animation: scaleTransform .5s ease-in;
+    animation: scaleTransform .5s ease-in;
+}
+
+
 
 @-webkit-keyframes btn-click-effect {
 	from {
@@ -185,4 +199,48 @@ CSS for parent component
     to {
         opacity: 1;
     }
+}
+
+
+/********************************* keyframes **************************************/
+
+/* move from / to  */
+
+@-webkit-keyframes moveFromLeft {
+	from { -webkit-transform: translateX(-100%); }
+}
+@keyframes moveFromLeft {
+	from { -webkit-transform: translateX(-100%); transform: translateX(-100%); }
+}
+
+@-webkit-keyframes moveFromRight {
+	from { -webkit-transform: translateX(100%); }
+}
+@keyframes moveFromRight {
+	from { -webkit-transform: translateX(100%); transform: translateX(100%); }
+}
+
+@-webkit-keyframes moveToBottom {
+	from {  }
+	to { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToBottom {
+	from { }
+	to { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
+@-webkit-keyframes moveToTop {
+	from { -webkit-transform: translateY(100%); }
+}
+@keyframes moveToTop {
+	from { -webkit-transform: translateY(100%); transform: translateY(100%); }
+}
+
+@-webkit-keyframes scaleTransform {
+	from { -webkit-transform: scale(0);  }
+	to { -webkit-transform: scale(1); }
+}
+@keyframes scaleTransform {
+	from { -webkit-transform: scale(0); transform: scale(0);  }
+	to { -webkit-transform: scale(1); transform: scale(1); }
 }

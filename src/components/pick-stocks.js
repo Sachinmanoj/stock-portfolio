@@ -13,6 +13,9 @@ class pickStocks extends Component {
         this.state.page = 1;
         this.state.filterCategoryList = this.appdataObj.getFilterCatogories();
         this.data = {};
+        this.data.animation = {};
+        this.data.animation.canAnimate = true;
+        this.data.animation.counter = 1;
         this.data.viewableStocks = this.getViewableStocklist(this.props, this.state);
         this.data.minStockinView = this.getMinStockinView(this.state);
         this.data.maxStockinView = this.getMaxStockinView(this.state);
@@ -33,6 +36,8 @@ class pickStocks extends Component {
     pageSwitchHandler(counter) {
         this.setState((prevState, props) => {
             let nextState = {};
+            this.data.animation.canAnimate = true;
+            this.data.animation.counter = counter;
             nextState.page = prevState.page + counter;
             return nextState;
         }); 
@@ -140,7 +145,8 @@ class pickStocks extends Component {
                     <Availablestocks 
                         stockdata={this.props.stockdata} 
                         viewableStocks={this.data.viewableStocks} 
-                        updatePortfolioHandler={this.props.updatePortfolioHandler.bind(this)} />
+                        updatePortfolioHandler={this.props.updatePortfolioHandler.bind(this)} 
+                        animation={this.data.animation}/>
                     <div className="stock-details-ctrls"> 
                         <div className="stock-details-prev-btn">
                             <PickStocknav counter={-1} text="PREV" disableOn={this.disablePrev()} countUpdateHandler={this.pageSwitchHandler.bind(this)} />
@@ -152,6 +158,14 @@ class pickStocks extends Component {
                 </div>
             </div>
         );
+    }
+    
+    componentDidUpdate() {
+        this.data.animation.canAnimate = false;
+    }
+    
+    componentDidMount() {
+        this.data.animation.canAnimate = false;
     }
 }
 

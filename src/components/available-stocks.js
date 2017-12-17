@@ -8,8 +8,15 @@ class availableStocks extends Component {
     }
 
     render() {
-        let stocks = this.props.viewableStocks.map((stock) => {
-            return (<li className="stock-inidividual-container" key={stock.stockId}>
+        let animationDetails;
+        if(this.props.animation.canAnimate) {
+            animationDetails = (this.props.animation.counter === 1) ? 'tile-move-from-right' : 'tile-move-from-left';
+        }
+        else {
+            animationDetails = 'tile-move-from-right';
+        }
+        let stocks = this.props.viewableStocks.map((stock) => { 
+            return (<li className={"stock-inidividual-container " + animationDetails } key={stock.stockId}>
                 <div className="stock-inidividual-name"> 
                     {stock.name} 
                     <div  className="stock-inidividual-sector"> {stock.sector} </div>

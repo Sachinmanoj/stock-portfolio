@@ -86,6 +86,7 @@ class managePortfolio extends Component {
 
 
     render() {
+        var hideoverlay = (this.data.portfolioStocks.length) > 0 ? 'hide' : 'show';
         return  (
             <div  className="stock-inner-layout">
                 <div className="stock-inner-header portfolio-stand">
@@ -116,6 +117,8 @@ class managePortfolio extends Component {
                     findInShareDetails = {this.findInShareDetails.bind(this)}
                     netWorth = {this.data.netWorth}
                     />
+                    <div className={ "stock-flex-container-overlay " + hideoverlay}>
+                    </div>
                 </div>
             </div>
         );

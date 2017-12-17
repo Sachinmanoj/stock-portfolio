@@ -24,7 +24,7 @@ class stockTable extends Component {
 
         let stockRows = this.props.portfolioStocks.map(stock => {
             let shareDetail = this.props.findInShareDetails(this.props.shareDetails, stock.stockId);
-            return (<tr key={stock.stockId}>
+            return (<tr key={stock.stockId} className="scale-animation">
                 <td> {stock.name} </td>
                 <td> {this.getPriceOfStock(stock.stockId)} </td>
                 <td> 
